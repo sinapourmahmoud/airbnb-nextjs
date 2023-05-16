@@ -9,7 +9,7 @@ const Logo: React.FC = () => {
       alt="logo"
       width={80}
       height={80}
-      className=" object-contain "
+      className="object-contain"
     />
   );
 };

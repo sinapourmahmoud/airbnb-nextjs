@@ -9,6 +9,8 @@ import {
 interface Toggletype {
   toggle: string | null;
   setToggle: Dispatch<SetStateAction<string>>;
+  isOpen: boolean | null;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 interface PropsInterface {
@@ -18,11 +20,14 @@ interface PropsInterface {
 export const FrontContext = createContext<Toggletype>({} as Toggletype);
 function Context({ children }: PropsInterface) {
   let [toggle, setToggle] = useState("");
+  let [isOpen, setIsOpen] = useState(false);
   return (
     <FrontContext.Provider
       value={{
         toggle,
         setToggle,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

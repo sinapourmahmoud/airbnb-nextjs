@@ -1,9 +1,8 @@
-"use client";
-
 import Nav from "@/components/navbar/Nav";
 import "./globals.css";
-import { Inter, Nunito } from "next/font/google";
+import { Nunito } from "next/font/google";
 import Context from "@/context/ToogleContext";
+import LayoutBoxes from "@/components/LayoutBoxes";
 
 const metaFont = Nunito({
   subsets: ["latin"],
@@ -21,12 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={metaFont.className}>
-        <Context>
-          <>
-            <Nav />
-            <div>{children}</div>
-          </>
-        </Context>
+        <LayoutBoxes />
+        {children}
       </body>
     </html>
   );
