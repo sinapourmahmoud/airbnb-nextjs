@@ -19,7 +19,7 @@ const InnerForm = (props: FormikProps<FormValues>) => {
         <Input name="password" labelName="Password" type="password" />
       </div>
       <div className="flex items-center gap-3 mt-5">
-        <Button label="Register" />
+        <Button label="Login" />
       </div>
     </Form>
   );

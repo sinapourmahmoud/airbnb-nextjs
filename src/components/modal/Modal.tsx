@@ -18,14 +18,10 @@ const Modal: React.FC<Props> = ({
 }) => {
   let [show, setShow] = useState(isOpen);
   const closeModal = () => {
-    setTimeout(() => {
-      onClose();
-    }, 300);
+    onClose();
   };
   const submitModal = () => {
-    setTimeout(() => {
-      onSubmit();
-    }, 300);
+    onSubmit();
   };
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-20 bg-[rgba(0,0,0,0.4)] flex items-center justify-center">
