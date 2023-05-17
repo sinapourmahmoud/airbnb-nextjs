@@ -5,12 +5,10 @@ interface Props {
   outline?: boolean;
   small?: boolean;
   disabled?: boolean;
-  disabeldText?: string;
   clicked?: () => void;
 }
 const Button: React.FC<Props> = ({
   label,
-  disabeldText,
   outline,
   small,
   disabled,
@@ -21,13 +19,13 @@ const Button: React.FC<Props> = ({
       onClick={clicked}
       disabled={disabled}
       type="submit"
-      className={`   font-semibold   rounded-lg w-full ${
+      className={`   font-semibold   rounded-lg disabled:cursor-not-allowed w-full ${
         outline
-          ? "bg-white border-2 border-black"
+          ? "bg-white border-2 border-black disabled:text-neutral-400 disabled:border-neutral-400"
           : "text-white bg-rose-500 border-none disabled:bg-rose-400"
       } ${small ? "py-2 text-sm" : " py-3 text-base"}`}
     >
-      {disabled ? disabeldText : label}
+      {label}
     </button>
   );
 };

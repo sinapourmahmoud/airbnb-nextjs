@@ -19,6 +19,8 @@ const UserBar: React.FC<Props> = ({ currentUser }) => {
             console.log(currentUser);
             if (!currentUser) {
               setToggle("login");
+            } else {
+              setToggle("airebnb-home");
             }
           }}
         >

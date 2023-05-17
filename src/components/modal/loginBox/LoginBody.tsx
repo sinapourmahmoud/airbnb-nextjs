@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import LoginController from "./LoginController";
 import { FrontContext } from "@/context/ToogleContext";
 import { useRouter } from "next/navigation";
+import ModaltitleBox from "../ModaltitleBox";
 interface Props {
   title: string;
   subtitle: string;
@@ -12,10 +13,8 @@ const LoginBody: React.FC<Props> = ({ title, subtitle }) => {
   let { toggle, setToggle } = useContext(FrontContext);
   return (
     <>
-      <div className="flex flex-col gap-2">
-        <h2 className="text-xl font-bold">{title}</h2>
-        <span className="text-neutral-400 text-sm font-medium">{subtitle}</span>
-      </div>
+      <ModaltitleBox title={title} subtitle={subtitle} />
+
       <LoginController setToggle={setToggle} router={router} />
     </>
   );

@@ -7,7 +7,7 @@ import RegisterFooter from "../registerBox/RegisterFooter";
 interface Props {}
 const LoginModal: React.FC<Props> = () => {
   let { toggle, setToggle } = useContext(FrontContext);
-  if (toggle !== "login") return;
+  if (toggle !== "login") return null;
   return (
     <>
       <Modal
