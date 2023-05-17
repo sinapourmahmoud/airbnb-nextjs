@@ -6,15 +6,18 @@ import Modal from "./modal/Modal";
 import RegisterModal from "./modal/registerBox/RegisterModal";
 import LoginModal from "./modal/loginBox/LoginModal";
 import ReactToaster from "./ReactToaster";
-interface Props {}
-const LayoutBoxes: React.FC<Props> = () => {
+import { User } from "@prisma/client";
+interface Props {
+  currentUser?: any;
+}
+const LayoutBoxes: React.FC<Props> = ({ currentUser }) => {
   return (
     <Context>
       <>
         <ReactToaster />
         <RegisterModal></RegisterModal>
         <LoginModal></LoginModal>
-        <Nav />
+        <Nav currentUser={currentUser} />
       </>
     </Context>
   );

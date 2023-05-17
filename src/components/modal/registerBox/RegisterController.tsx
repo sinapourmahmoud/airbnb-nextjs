@@ -1,10 +1,11 @@
+"use client";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { withFormik, FormikProps, Form, Field, ErrorMessage } from "formik";
 import Input from "@/components/inputs/Input";
 import Button from "@/components/Button";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 // Shape of form values
 interface FormValues {
   name: string;
@@ -37,6 +38,7 @@ interface MyFormProps {
   name?: string;
   email?: string;
   password?: string;
+  setToggle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Wrap our form with the withFormik HoC
@@ -50,7 +52,7 @@ const RegisterController = withFormik<MyFormProps, FormValues>({
     };
   },
 
-  handleSubmit: ({ name, email, password }, props) => {
+  handleSubmit: ({ name, email, password }, { props }) => {
     axios
       .post("/api/register", {
         name,
@@ -58,7 +60,8 @@ const RegisterController = withFormik<MyFormProps, FormValues>({
         password,
       })
       .then((res) => {
-        console.log(res);
+        props.setToggle("login");
+        toast.success("Register successful");
       })
       .catch((err) => {
         console.log(err);

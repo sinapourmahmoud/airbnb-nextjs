@@ -1,3 +1,4 @@
+"use client";
 import { FrontContext } from "@/context/ToogleContext";
 import React, { useContext } from "react";
 import Modal from "../Modal";

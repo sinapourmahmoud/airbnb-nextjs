@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 interface Props {
   label: string;
@@ -5,6 +6,7 @@ interface Props {
   small?: boolean;
   disabled?: boolean;
   disabeldText?: string;
+  clicked?: () => void;
 }
 const Button: React.FC<Props> = ({
   label,
@@ -12,9 +14,11 @@ const Button: React.FC<Props> = ({
   outline,
   small,
   disabled,
+  clicked,
 }) => {
   return (
     <button
+      onClick={clicked}
       disabled={disabled}
       type="submit"
       className={`   font-semibold   rounded-lg w-full ${

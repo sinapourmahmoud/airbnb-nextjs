@@ -1,10 +1,13 @@
+"use client";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { withFormik, FormikProps, Form, Field, ErrorMessage } from "formik";
 import Input from "@/components/inputs/Input";
 import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+
 // Shape of form values
 interface FormValues {
   email: string;
@@ -33,6 +36,7 @@ interface MyFormProps {
   email?: string;
   password?: string;
   setToggle: React.Dispatch<React.SetStateAction<string>>;
+  router: any;
 }
 
 // Wrap our form with the withFormik HoC
@@ -53,6 +57,8 @@ const LoginController = withFormik<MyFormProps, FormValues>({
       if (res?.ok) {
         props.setToggle("");
         toast.success("login successful");
+        props.router.refresh();
+        props.router.push("/");
       } else {
         toast.error("login has error");
       }

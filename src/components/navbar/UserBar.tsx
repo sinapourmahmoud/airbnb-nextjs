@@ -1,14 +1,27 @@
 "use clinet";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavItems from "./NavItems";
-
-const UserBar: React.FC = () => {
+import { User } from "@prisma/client";
+import { FrontContext } from "@/context/ToogleContext";
+interface Props {
+  currentUser?: User | null;
+}
+const UserBar: React.FC<Props> = ({ currentUser }) => {
   let [isToggle, setIsToggle] = useState<boolean>(false);
-
+  let { setToggle } = useContext(FrontContext);
   return (
     <>
       <div className="flex  items-center gap-5 rounded-full ">
-        <a href="#" className="text-[16px] font-bold hidden lg:block">
+        <a
+          href="#"
+          className="text-[16px] font-bold hidden lg:block"
+          onClick={() => {
+            console.log(currentUser);
+            if (!currentUser) {
+              setToggle("login");
+            }
+          }}
+        >
           Airebnb your home
         </a>
         <div
@@ -29,14 +42,21 @@ const UserBar: React.FC = () => {
               clipRule="evenodd"
             />
           </svg>
+
           <img
-            src="/images/placeholder.jpg"
+            src={`${
+              currentUser?.image ? currentUser.image : "/images/placeholder.jpg"
+            }`}
             alt="avatar"
             className="w-8 h-8 rounded-full hidden lg:block"
           />
         </div>
       </div>
-      <NavItems isToggle={isToggle} setIsToggle={setIsToggle} />
+      <NavItems
+        currentUser={currentUser}
+        isToggle={isToggle}
+        setIsToggle={setIsToggle}
+      />
     </>
   );
 };
