@@ -2,9 +2,11 @@
 import React, { useCallback, useState } from "react";
 import AirbnbCategories from "./AirbnbCategories";
 import Button from "@/components/Button";
-
+import PlaceLocation from "./PlaceLocation";
+import { WorldCountriesType } from "@/types/worldsType";
 let initialList = {
   category: "",
+  location: null,
 };
 enum STEPS {
   CATEGORY = 0,
@@ -22,10 +24,8 @@ const AirbnbBody: React.FC = () => {
     if (step === 5) {
       return;
     }
-    if (step === 0 && !list.category) {
-      return;
-    }
-    setStep((prev) => prev + 1);
+
+    setStep((prev) => ++prev);
   }, [step]);
   const goBack = useCallback(() => {
     if (step === 0) {
@@ -34,7 +34,7 @@ const AirbnbBody: React.FC = () => {
     setStep((prev) => prev - 1);
   }, [step]);
   const changeList = useCallback(
-    (name: string, val: string) => {
+    (name: string, val: any) => {
       setList((prev) => {
         return {
           ...prev,
@@ -54,6 +54,13 @@ const AirbnbBody: React.FC = () => {
             changeList("category", label);
           }}
         />
+      ) : step === 1 ? (
+        <PlaceLocation
+          location={list.location}
+          clicked={(label: WorldCountriesType | null) => {
+            changeList("location", label);
+          }}
+        />
       ) : null}
       <div className="flex items-center gap-3 mt-4">
         <Button
@@ -62,7 +69,13 @@ const AirbnbBody: React.FC = () => {
           outline
           disabled={step == 0}
         />
-        <Button label="Next" clicked={() => goNext()} disabled={step == 5} />
+        <Button
+          label="Next"
+          clicked={() => {
+            goNext();
+          }}
+          disabled={step == 5}
+        />
       </div>
     </div>
   );

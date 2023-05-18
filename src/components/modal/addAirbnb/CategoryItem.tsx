@@ -16,8 +16,8 @@ const CategoryItem: React.FC<Props> = ({
   return (
     <div
       onClick={clicked}
-      className={`flex flex-col gap-2 items-center transition-all duration-300  rounded-lg border-2  hover:border-black cursor-pointer ${
-        selected ? "border-black" : "border-transparent"
+      className={`flex flex-col gap-2 items-center transition-all duration-300  rounded-lg border py-4  hover:border-black cursor-pointer ${
+        selected ? "border-black" : "border-gray-300"
       }`}
     >
       <Icon fontSize={38} className="text-black" />

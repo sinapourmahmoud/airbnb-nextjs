@@ -11,7 +11,7 @@ const AirbnbCategories: React.FC<Props> = ({ clicked, selectedCategory }) => {
   return (
     <div>
       <ModaltitleBox subtitle="Please select category" title="Categories" />
-      <div className="grid grid-cols-2 max-h-[40vh] overflow-auto">
+      <div className="grid grid-cols-2 mt-4 max-h-[40vh] overflow-auto">
         {categories.map((item, index) => (
           <CategoryItem
             clicked={() => {
