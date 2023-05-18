@@ -7,10 +7,11 @@ import Select from "react-select";
 import { WorldCountriesType } from "@/types/worldsType";
 import dynamic from "next/dynamic";
 interface Props {
-  location?: WorldCountriesType | null;
   clicked: (label: WorldCountriesType | null) => void;
+  location: WorldCountriesType | null;
 }
-const PlaceLocation: React.FC<Props> = ({ location, clicked }) => {
+const PlaceLocation: React.FC<Props> = ({ clicked, location }) => {
+  let [locationVal, setLocationVal] = useState<WorldCountriesType | null>(null);
   console.log(countriesList);
   let Maps = useMemo(
     () =>
@@ -28,9 +29,10 @@ const PlaceLocation: React.FC<Props> = ({ location, clicked }) => {
       <Select
         placeholder="Anywhere..."
         options={countriesList}
-        value={location}
+        value={locationVal}
         onChange={(val) => {
           clicked(val);
+          setLocationVal(val);
         }}
         formatOptionLabel={(val) => (
           <div

@@ -13,8 +13,17 @@ let validateSchema = Yup.object().shape({
 interface Props {
   goBack: () => void;
   goNext: () => void;
+  title: string;
+  description: string;
+  clicked: (titleBox: string, label: string) => void;
 }
-const Description: React.FC<Props> = ({ goBack, goNext }) => {
+const Description: React.FC<Props> = ({
+  title,
+  description,
+  clicked,
+  goBack,
+  goNext,
+}) => {
   return (
     <div className="flex flex-col gap-4">
       <ModaltitleBox
@@ -24,10 +33,12 @@ const Description: React.FC<Props> = ({ goBack, goNext }) => {
       <Formik
         validationSchema={validateSchema}
         initialValues={{
-          title: "",
-          description: "",
+          title,
+          description,
         }}
-        onSubmit={() => {
+        onSubmit={({ title, description }) => {
+          clicked("title", title);
+          clicked("description", description);
           goNext();
         }}
       >

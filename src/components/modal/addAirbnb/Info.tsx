@@ -17,7 +17,7 @@ const Info: React.FC<Props> = ({ guests, bathrooms, rooms, clicked }) => {
       />
       <div className="my-3 flex flex-col gap-4">
         <InfoOptions
-          listTitle="rooms"
+          listTitle="roomCount"
           clicked={(titleBox: string, label: number) => {
             clicked(titleBox, label);
           }}
@@ -26,7 +26,7 @@ const Info: React.FC<Props> = ({ guests, bathrooms, rooms, clicked }) => {
           subtitle="how many rooms should have ?"
         />
         <InfoOptions
-          listTitle="bathrooms"
+          listTitle="bathroomCount"
           clicked={(titleBox: string, label: number) => {
             clicked(titleBox, label);
           }}
@@ -35,7 +35,7 @@ const Info: React.FC<Props> = ({ guests, bathrooms, rooms, clicked }) => {
           subtitle="how many bathrooms should have ?"
         />
         <InfoOptions
-          listTitle="guests"
+          listTitle="guestCount"
           clicked={(titleBox: string, label: number) => {
             clicked(titleBox, label);
           }}

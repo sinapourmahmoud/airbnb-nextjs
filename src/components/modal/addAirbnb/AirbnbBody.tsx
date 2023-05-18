@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import AirbnbCategories from "./AirbnbCategories";
 import Button from "@/components/Button";
 import PlaceLocation from "./PlaceLocation";
@@ -7,12 +7,21 @@ import { WorldCountriesType } from "@/types/worldsType";
 import Info from "./Info";
 import UploadImage from "@/components/UploadImage";
 import Description from "./Description";
+import Price from "./Price";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { FrontContext } from "@/context/ToogleContext";
 let initialList = {
   category: "",
-  location: null,
-  guests: 1,
-  rooms: 1,
-  bathrooms: 1,
+  locationValue: null,
+  guestCount: 1,
+  roomCount: 1,
+  imageSrc: "",
+  bathroomCount: 1,
+  description: "",
+  title: "",
+  price: 1,
 };
 enum STEPS {
   CATEGORY = 0,
@@ -24,10 +33,28 @@ enum STEPS {
 }
 
 const AirbnbBody: React.FC = () => {
+  let { setToggle } = useContext(FrontContext);
+  let router = useRouter();
   let [list, setList] = useState(initialList);
   let [step, setStep] = useState<STEPS>(0);
   const goNext = useCallback(() => {
     if (step === 5) {
+      console.log(list);
+      axios
+        .post("/api/listing", list)
+        .then((res) => {
+          console.log(res);
+          toast.success("Your place successfully added");
+          router.refresh();
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("You have error, try again please");
+        })
+        .finally(() => {
+          setToggle("");
+        });
+
       return;
     }
 
@@ -62,24 +89,46 @@ const AirbnbBody: React.FC = () => {
         />
       ) : step === 1 ? (
         <PlaceLocation
-          location={list.location}
+          location={list.locationValue}
           clicked={(label: WorldCountriesType | null) => {
-            changeList("location", label);
+            changeList("locationValue", label);
           }}
         />
       ) : step === 2 ? (
         <Info
-          bathrooms={list.bathrooms}
-          rooms={list.rooms}
-          guests={list.guests}
+          bathrooms={list.bathroomCount}
+          rooms={list.roomCount}
+          guests={list.guestCount}
           clicked={(listtitle: string, label: number) => {
             changeList(listtitle, label);
           }}
         />
       ) : step === 3 ? (
-        <UploadImage />
+        <UploadImage
+          clicked={(label: string) => {
+            changeList("imageSrc", label);
+          }}
+          imageSrc={list.imageSrc}
+        />
       ) : step === 4 ? (
-        <Description goBack={goBack} goNext={goNext} />
+        <Description
+          title={list.title}
+          description={list.description}
+          clicked={(titleBox: string, label: string) => {
+            changeList(titleBox, label);
+          }}
+          goBack={goBack}
+          goNext={goNext}
+        />
+      ) : step === 5 ? (
+        <Price
+          goBack={goBack}
+          clicked={(label: number) => {
+            changeList("price", label);
+            goNext();
+          }}
+          price={list.price}
+        />
       ) : null}
       {step < 4 ? (
         <div className="flex items-center gap-3 mt-4">

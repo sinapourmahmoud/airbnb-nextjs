@@ -5,13 +5,16 @@ import { CldUploadWidget } from "next-cloudinary";
 
 import Image from "next/image";
 import { TbPhotoPlus } from "react-icons/tb";
-const UploadImage: React.FC = () => {
-  let [value, setValue] = useState(null);
+interface Props {
+  imageSrc: string;
+  clicked: (label: string) => void;
+}
+const UploadImage: React.FC<Props> = ({ imageSrc, clicked }) => {
   let uploadImage = useCallback(
     (result: any) => {
-      setValue(result.info.secure_url);
+      clicked(result.info.secure_url);
     },
-    [value]
+    [imageSrc]
   );
 
   return (
@@ -31,17 +34,19 @@ const UploadImage: React.FC = () => {
           return (
             <div
               onClick={() => {
-                open?.();
+                if (open) {
+                  open?.();
+                }
               }}
               className="w-full border cursor-pointer min-h-[35vh] hover:opacity-75 border-neutral-300 relative  flex items-center justify-center rounded-lg"
             >
               <TbPhotoPlus fontSize={34} className="text-black" />
-              {value && (
+              {imageSrc && (
                 <div className="absolute w-full h-full">
                   <Image
-                    src={value}
+                    src={imageSrc}
                     alt="uploadedImage"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                     width={100}
                     height={350}
                   />
