@@ -4,9 +4,15 @@ import AirbnbCategories from "./AirbnbCategories";
 import Button from "@/components/Button";
 import PlaceLocation from "./PlaceLocation";
 import { WorldCountriesType } from "@/types/worldsType";
+import Info from "./Info";
+import UploadImage from "@/components/UploadImage";
+import Description from "./Description";
 let initialList = {
   category: "",
   location: null,
+  guests: 1,
+  rooms: 1,
+  bathrooms: 1,
 };
 enum STEPS {
   CATEGORY = 0,
@@ -61,22 +67,37 @@ const AirbnbBody: React.FC = () => {
             changeList("location", label);
           }}
         />
-      ) : null}
-      <div className="flex items-center gap-3 mt-4">
-        <Button
-          label="Prev"
-          clicked={() => goBack()}
-          outline
-          disabled={step == 0}
-        />
-        <Button
-          label="Next"
-          clicked={() => {
-            goNext();
+      ) : step === 2 ? (
+        <Info
+          bathrooms={list.bathrooms}
+          rooms={list.rooms}
+          guests={list.guests}
+          clicked={(listtitle: string, label: number) => {
+            changeList(listtitle, label);
           }}
-          disabled={step == 5}
         />
-      </div>
+      ) : step === 3 ? (
+        <UploadImage />
+      ) : step === 4 ? (
+        <Description goBack={goBack} goNext={goNext} />
+      ) : null}
+      {step < 4 ? (
+        <div className="flex items-center gap-3 mt-4">
+          <Button
+            label="Prev"
+            clicked={() => goBack()}
+            outline
+            disabled={step == 0}
+          />
+          <Button
+            label="Next"
+            clicked={() => {
+              goNext();
+            }}
+            disabled={step == 5}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
