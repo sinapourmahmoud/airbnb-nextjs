@@ -39,11 +39,9 @@ const AirbnbBody: React.FC = () => {
   let [step, setStep] = useState<STEPS>(0);
   const goNext = useCallback(() => {
     if (step === 5) {
-      console.log(list);
       axios
         .post("/api/listing", list)
         .then((res) => {
-          console.log(res);
           toast.success("Your place successfully added");
           router.refresh();
         })
@@ -74,7 +72,7 @@ const AirbnbBody: React.FC = () => {
           [name]: val,
         };
       });
-      console.log(list);
+      list;
     },
     [list]
   );

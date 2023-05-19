@@ -12,7 +12,6 @@ interface Props {
 }
 const PlaceLocation: React.FC<Props> = ({ clicked, location }) => {
   let [locationVal, setLocationVal] = useState<WorldCountriesType | null>(null);
-  console.log(countriesList);
   let Maps = useMemo(
     () =>
       dynamic(() => import("./../../Maps"), {

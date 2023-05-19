@@ -7,6 +7,7 @@ import RegisterModal from "./modal/registerBox/RegisterModal";
 import LoginModal from "./modal/loginBox/LoginModal";
 import ReactToaster from "./ReactToaster";
 import AddAirbnb from "@/components/modal/addAirbnb/AddAirbnb";
+import CategoryBoxes from "./navbar/CategoryBoxes";
 interface Props {
   currentUser?: any;
 }
@@ -19,6 +20,7 @@ const LayoutBoxes: React.FC<Props> = ({ currentUser }) => {
         <LoginModal></LoginModal>
         <AddAirbnb></AddAirbnb>
         <Nav currentUser={currentUser} />
+        <CategoryBoxes />
       </>
     </Context>
   );

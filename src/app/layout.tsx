@@ -19,7 +19,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   let currentUser = await getCurrentUser();
-  console.log(currentUser);
   return (
     <html lang="en">
       <body className={metaFont.className}>

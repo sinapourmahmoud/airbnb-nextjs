@@ -27,7 +27,6 @@ const Price: React.FC<Props> = ({ goBack, price, clicked }) => {
           price,
         }}
         onSubmit={({ price }) => {
-          console.log(price);
           clicked(price);
         }}
       >

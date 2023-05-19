@@ -16,7 +16,6 @@ const UserBar: React.FC<Props> = ({ currentUser }) => {
           href="#"
           className="text-[16px] font-bold hidden lg:block"
           onClick={() => {
-            console.log(currentUser);
             if (!currentUser) {
               setToggle("login");
             } else {
